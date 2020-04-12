@@ -7,11 +7,15 @@ import { IProduct } from './product';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-
-
   constructor() {
     this.filteredProducts = this.products;
     this.listFilter = 'cart'
+  
+  }
+  public pageTitle ="Product list";
+
+  onRatingClicked(message: string): void{
+    this.pageTitle = "Product list: " + message;
   }
 
   ngOnInit() {
@@ -49,7 +53,7 @@ export class ProductListComponent implements OnInit {
     "releaseDate": "March 18, 2020",
     "description": "15 gallom capacity",
     "price": 55.22,
-    "starRating": 4.1,
+    "starRating": 3.1,
     "imageUrl": "assets/images/garden_cart.png"
   }]
 
