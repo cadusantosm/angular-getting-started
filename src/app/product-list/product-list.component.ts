@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from './product';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'pm-product-list',
@@ -7,23 +8,30 @@ import { IProduct } from './product';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  constructor() {
-    this.filteredProducts = this.products;
-    this.listFilter = 'cart'
-  
-  }
-  public pageTitle ="Product list";
+  imageWidth: number = 50;
+  imageMargin: number = 10;
+  showImage: boolean = false;
+  errorMessage: string;
+  constructor(private productService: ProductService) {
 
-  onRatingClicked(message: string): void{
+  }
+  public pageTitle = "Product list";
+
+  onRatingClicked(message: string): void {
     this.pageTitle = "Product list: " + message;
   }
 
   ngOnInit() {
+    this.productService.getProducts().subscribe({
+      next: products => {
+        this.products = products
+        this.filteredProducts = this.products;
+      },
+      error: err => this.errorMessage = err
+    });
   }
 
-  imageWidth: number = 50;
-  imageMargin: number = 10;
-  showImage: boolean = false;
+
 
   _listFilter: string;
   get listFilter(): string {
@@ -37,25 +45,7 @@ export class ProductListComponent implements OnInit {
   }
 
   filteredProducts: IProduct[];
-  products: IProduct[] = [{
-    "productId": 1,
-    "productName": "Garden Cart",
-    "productCode": "GDN-002",
-    "releaseDate": "March 18, 2020",
-    "description": "15 gallom capacity",
-    "price": 55.22,
-    "starRating": 4.1,
-    "imageUrl": "assets/images/garden_cart.png"
-  },{
-    "productId": 2,
-    "productName": "Garden",
-    "productCode": "GDN-003",
-    "releaseDate": "March 18, 2020",
-    "description": "15 gallom capacity",
-    "price": 55.22,
-    "starRating": 3.1,
-    "imageUrl": "assets/images/garden_cart.png"
-  }]
+  products: IProduct[]
 
   toggleImage(): void {
     this.showImage = !this.showImage;
