@@ -27,7 +27,7 @@
             "styles": [
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/font-awesome/css/font-awesome.css"              
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.slim.min.js",
@@ -121,6 +121,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "APM"
+    }
+  },
+  "defaultProject": "APM",
+  "cli": {
+    "analytics": "40519d85-30fe-411d-8fd9-8c3efa91ba33"
+  }
 }
